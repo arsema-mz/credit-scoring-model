@@ -1,0 +1,32 @@
+# Core Data Libraries
+pandas
+numpy
+
+# Visualization
+matplotlib
+seaborn
+
+# Modeling
+scikit-learn
+xgboost
+
+# Model Interpretability
+shap
+
+# API Development
+fastapi
+uvicorn
+
+# Data Validation
+pydantic
+
+# Jupyter Notebook Support
+notebook
+ipykernel
+
+# Testing
+pytest
+
+# For handling environment variables (optional)
+python-dotenv
+ 

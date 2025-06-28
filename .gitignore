@@ -1,0 +1,32 @@
+# Ignore data files
+data/
+!data/.gitkeep
+
+# Ignore Python cache
+__pycache__/
+*.py[cod]
+*.pyo
+
+# Ignore virtual environments
+venv/
+.env/
+*.env
+
+# Ignore Jupyter Notebook checkpoints
+.ipynb_checkpoints/
+
+# Ignore system files
+.DS_Store
+Thumbs.db
+
+# Ignore compiled files
+*.exe
+*.dll
+*.so
+
+# Ignore logs
+*.log
+
+# Ignore docker volumes if any
+volumes/
+ 
