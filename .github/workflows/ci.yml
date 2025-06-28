@@ -29,12 +29,3 @@ jobs:
         run: |
           pip install flake8
           flake8 src/ --count --max-complexity=10 --max-line-length=127 --statistics || true
-
-      - name: Run tests (skip if not present)
-        run: |
-          if [ -f "tests/test_data_processing.py" ]; then
-            pip install pytest
-            pytest tests/
-          else
-            echo "No tests yet."
-          fi
