@@ -53,3 +53,39 @@ The goal of EDA was to understand the structure, distribution, and quality of th
 - **Datetime Parsing**: Converted `TransactionStartTime` to datetime and extracted features like hour and day.
 - **Categorical Features**: Visualized frequency distributions for variables like `productcategory` and `channelid`.
 - **Correlation Analysis**: Heatmap revealed weak linear relationships; no strong multicollinearity.
+
+## Data Processing
+
+* Raw data is loaded from `data/raw/data.csv`.
+* Preprocessing includes datetime feature extraction, aggregation, categorical encoding, missing value imputation, and numerical scaling.
+* Feature engineering is implemented as sklearn-compatible transformers inside `src/data_processing.py`.
+* Processed data is saved in `data/processed/processed.csv`.
+
+
+## Proxy Target Variable Engineering
+
+* RFM (Recency, Frequency, Monetary) metrics are computed per customer.
+* K-Means clustering (3 clusters) segments customers.
+* The cluster with the highest risk profile is labeled `is_high_risk = 1`.
+* This label is merged back into the dataset for supervised learning.
+
+
+## Model Training and Evaluation
+
+* Models trained: Logistic Regression, Random Forest.
+* Hyperparameter tuning done via GridSearchCV.
+* Evaluation metrics: Accuracy, Precision, Recall, F1-score, ROC-AUC.
+* Best models saved as `.pkl` files in `models/`.
+
+
+## API Deployment
+
+* REST API built with FastAPI (`src/api/main.py`).
+
+* Pydantic models used for input validation (`src/api/pydantic_models.py`).
+
+* API loads the trained model with `joblib`.
+
+* Endpoint `/predict` accepts JSON customer data and returns risk prediction and probability.
+* Access API docs at: http://localhost:8000/docs
+

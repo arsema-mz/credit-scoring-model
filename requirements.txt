@@ -30,3 +30,8 @@ pytest
 # For handling environment variables (optional)
 python-dotenv
  
+fastapi
+uvicorn
+flake8
+black
+mlflow
