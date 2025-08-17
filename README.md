@@ -1,15 +1,3 @@
-Perfect 👌 thanks for sharing — this is already very strong technically, but for your **capstone** and the **finance-sector audience**, we’ll refocus the README so it:
-
-* Frames the project as a **business tool** (decision-making support).
-* Shows **reliability, transparency, and reduced risk** (what finance cares about).
-* Minimizes technical jargon, but still acknowledges robustness.
-* Highlights **impact and value** (instead of algorithms).
-* Keeps it **professional, concise, and stakeholder-friendly**.
-
-Here’s a rewritten version tailored to that goal:
-
----
-
 # Credit Risk Scoring with Alternative Data
 
 This project delivers a **decision-support tool** for assessing credit risk using **alternative data sources** (such as telecom and transaction data). Designed for a finance-sector audience, it demonstrates how modern data science can **improve risk management** while remaining **transparent, auditable, and regulator-friendly**.
