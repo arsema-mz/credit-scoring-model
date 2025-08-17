@@ -1,0 +1,50 @@
+paths:
+  processed: data/processed/processed.csv
+  models_dir: models/
+
+data:
+  target: is_high_risk
+  drop_cols:
+    - is_high_risk
+    - transactionid
+    - batchid
+    - accountid
+    - subscriptionid
+    - customerid
+    - transactionstarttime
+  cast_bool_to_int: true
+  drop_object_columns: true
+
+split:
+  test_size: 0.20
+  random_state: 42
+  stratify: true
+
+tuning:
+  cv: 5
+  scoring: f1
+  n_jobs: -1
+
+models:
+  logistic_regression:
+    enabled: true
+    init:
+      max_iter: 1000
+      class_weight: balanced
+      solver: liblinear
+    grid:
+      C: [0.01, 0.1, 1, 10]
+      penalty: ["l2"]
+  random_forest:
+    enabled: true
+    init:
+      random_state: 42
+    grid:
+      n_estimators: [100, 200]
+      max_depth: [5, 10, null]
+      min_samples_split: [2, 5]
+      min_samples_leaf: [1, 2]
+
+output:
+  logreg_path: models/logreg_best.pkl
+  rf_path: models/random_forest_best.pkl
