@@ -166,6 +166,42 @@ def process_data(input_path='data/raw/data.csv', output_path='data/processed/pro
         high_risk_cluster = max(scores, key=lambda x: x[1])[0]
         rfm['is_high_risk'] = (rfm['cluster'] == high_risk_cluster).astype(int)
         return rfm[['customerid', 'is_high_risk']]
+    
+
+# ===== API Input Processor =====
+
+def process_input(data: dict):
+    """
+    Takes a single JSON-like dict (from API request) and applies preprocessing
+    pipeline to return model-ready features.
+    """
+    df = pd.DataFrame([data])  # turn dict into one-row DataFrame
+
+    # Clean column names to match training
+    df.columns = df.columns.str.lower()
+
+    # Define same preprocessing pipeline (without target engineering)
+    pipeline = Pipeline([
+        ('datetime_features', DateTimeFeatures(datetime_column='transactionstarttime')),
+        ('aggregate_features', CustomerAggregateFeatures(customer_id_col='customerid', amount_col='amount')),
+        ('categorical_encoding', CategoricalEncoder(
+            one_hot_cols=['productcategory', 'currencycode'],
+            label_encode_cols=['providerid', 'channelid', 'productid']
+        )),
+        ('missing_value_imputation', MissingValueHandler()), 
+        ('scaling', NumericalScaler())
+    ])
+
+    processed = pipeline.fit_transform(df)
+
+    # Drop target if accidentally created
+    if "is_high_risk" in processed.columns:
+        processed = processed.drop(columns=["is_high_risk"])
+
+    return processed
+
+
+
 
     # Generate target labels and merge into processed data
     rfm_labels = create_high_risk_label(df)
