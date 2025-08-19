@@ -1,6 +1,5 @@
-# app/main.py
 from fastapi import FastAPI
-from app.pydantic_models import CreditRequest, CreditResponse
+from pydantic_models import CreditRequest, CreditResponse
 import joblib
 import pandas as pd
 
